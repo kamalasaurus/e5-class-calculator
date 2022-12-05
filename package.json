@@ -1,0 +1,33 @@
+{
+  "name": "e5-class-calculator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "e5-class-calculator",
+  "author": "kamalasaurus",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "gatsby": "^5.2.0",
+    "gatsby-plugin-manifest": "^5.2.0",
+    "gatsby-plugin-postcss": "^6.2.0",
+    "gatsby-plugin-sitemap": "^6.2.0",
+    "postcss": "^8.4.19",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.8",
+    "typescript": "^4.8.4"
+  }
+}
