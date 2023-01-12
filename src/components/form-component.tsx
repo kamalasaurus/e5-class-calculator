@@ -154,22 +154,50 @@ const levelOptions: string[][] = [
   ['ranger', 'knight', 'alchemist']
 ]
 
-const allCombos: string[][] = []
+// concat inner dimension from 1:5 to get all terminal points
+// it's a lot more that 243 holy crap
+// should chart the bell curve and come up with
+// appropriate clusters and names
 
-const n = 3 ** 5 // total number of class combos
-
-for (let x = 0; x < 3; x++) {
-  let combo: string[] = []
-  for (let y = 0; y < 5; y++) {
-    combo.push(levelOptions[y][x])
-  }
-  allCombos.push(combo)
+function makeCombos(depth: number): number[][] {
+  return Array.from(
+    {length: 3 ** depth},
+    (_, i) => Array
+      .from(
+        {length: depth},
+        (_, j) => Math.floor(i / Math.pow(3, j)) % 3
+      )
+  )
 }
+
+const levelCombos1: string[][] = makeCombos(1)
+  .map(levels => levels.map((x, y) => levelOptions[y][x]))
+
+const levelCombos2: string[][] = makeCombos(2)
+  .map(levels => levels.map((x, y) => levelOptions[y][x]))
+
+const levelCombos3: string[][] = makeCombos(3)
+  .map(levels => levels.map((x, y) => levelOptions[y][x]))
+
+const levelCombos4: string[][] = makeCombos(4)
+  .map(levels => levels.map((x, y) => levelOptions[y][x]))
+
+const levelCombos5: string[][] = makeCombos(5)
+  .map(levels => levels.map((x, y) => levelOptions[y][x]))
 
 const FormComponent = () => {
   return (
     <div>
-      { allCombos.map(combo => <Character levels={combo} />) }
+      <h1 className="font-medium leading-tight text-5xl mt-0 mb-2">Level 1</h1>
+      { levelCombos1.map(combo => <Character levels={combo} />) }
+      <h1 className="font-medium leading-tight text-5xl mt-0 mb-2">Level 2</h1>
+      { levelCombos2.map(combo => <Character levels={combo} />) }
+      <h1 className="font-medium leading-tight text-5xl mt-0 mb-2">Level 3</h1>
+      { levelCombos3.map(combo => <Character levels={combo} />) }
+      <h1 className="font-medium leading-tight text-5xl mt-0 mb-2">Level 4</h1>
+      { levelCombos4.map(combo => <Character levels={combo} />) }
+      <h1 className="font-medium leading-tight text-5xl mt-0 mb-2">Level 5</h1>
+      { levelCombos5.map(combo => <Character levels={combo} />) }
     </div>
   )
 }
