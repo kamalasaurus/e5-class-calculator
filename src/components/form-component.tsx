@@ -131,6 +131,8 @@ class Character extends React.Component <CharacterProps, CharacterState> {
       this.state.stats['vitality'] += vitality
       this.state.stats['affinity'] += affinity
     })
+
+    window.allCombos.push(this.state.stats)
   }
 
   render() {
@@ -184,6 +186,35 @@ const levelCombos4: string[][] = makeCombos(4)
 
 const levelCombos5: string[][] = makeCombos(5)
   .map(levels => levels.map((x, y) => levelOptions[y][x]))
+
+// out of 363 combos 148 are unique
+
+window.allCombos = []
+
+const hist = window.allCombos.map(Object.values).map(e => e.join('-')).reduce((obj, e) => {
+  if (obj[e]) obj[e] += 1;
+  else obj[e] = 1;
+  return obj;
+}, {})
+
+const freqs = Object.values(hist).reduce((obj, val) => {
+  const key = val.toString()
+  if (obj[key]) obj[key] += 1;
+  else obj[key] = 1;
+  return obj;
+}, {})
+
+const freq_dist = Object.entries(hist).reduce((obj, [key, val]) => {
+  const val_key = val.toString()
+  if (obj[val_key]) obj[val_key].push(key);
+  else obj[val_key] = [key];
+  return obj;
+}, {})
+
+//sort each of the freq_dist arrays
+
+// freq_dist['1'].sort((a,b) => ( +a.split('-')[1] - +b.split('-')[1])).join(`\n`)
+// generic sort format
 
 const FormComponent = () => {
   return (
